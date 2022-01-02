@@ -6,7 +6,7 @@ using System.Linq;
 namespace FiniteDifferenceFormula {
     internal class Program {
         static void Main(string[] args) {
-            const int degree = 6;
+            const int degree = 16;
             
             List<int> vs = new() { 0 };
 
