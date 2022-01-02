@@ -19,7 +19,7 @@ namespace FiniteDifferenceFormula {
                 max_degree: degree, x0: 0, vs.Select((v) => new Fraction(v)).ToArray()
             );
 
-            using (StreamWriter sw = new StreamWriter("../../../../results/centered_intway.md")) {
+            using (StreamWriter sw = new StreamWriter($"../../../../results/centered_intway_n{degree}.md")) {
                 sw.Write("|derivative|accuracy|");
                 for (int i = -degree; i <= degree; i++) {
                     sw.Write($"{i}|");
