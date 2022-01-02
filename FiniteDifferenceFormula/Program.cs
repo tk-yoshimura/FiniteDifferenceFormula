@@ -1,43 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace FiniteDifferenceFormula {
     internal class Program {
         static void Main(string[] args) {
+            const int degree = 6;
+            
+            List<int> vs = new() { 0 };
+
+            for (int i = 1; i <= degree; i++) {
+                vs.Add(i);
+                vs.Add(-i);
+            }
+
             Dictionary<(int degree, int accuracy), Fraction[]> table1 = Coef.Generate(
-                max_degree: 4, x0: 0,
-                new Fraction[] { 
-                    0, 1, -1, 2, -2, 3, -3, 4, -4 
-                }
+                max_degree: degree, x0: 0, vs.Select((v) => new Fraction(v)).ToArray()
             );
 
-            Dictionary<(int degree, int accuracy), Fraction[]> table2 = Coef.Generate(
-                max_degree: 4, x0: 0,
-                new Fraction[] { 
-                    new Fraction(1, 2), new Fraction(-1, 2), new Fraction(3, 2), new Fraction(-3, 2), 
-                    new Fraction(5, 2), new Fraction(-5, 2), new Fraction(7, 2), new Fraction(-7, 2) 
+            using (StreamWriter sw = new StreamWriter("../../../../results/centered_intway.md")) {
+                sw.Write("|derivative|accuracy|");
+                for (int i = -degree; i <= degree; i++) {
+                    sw.Write($"{i}|");
                 }
-            );
-
-            Dictionary<(int degree, int accuracy), Fraction[]> table3 = Coef.Generate(
-                max_degree: 4, x0: 0,
-                new Fraction[] { 
-                    0, 1, 2, 3, 4, 5, 6, 7, 8
+                sw.Write("\n|----|----|");
+                for (int i = -degree; i <= degree; i++) {
+                    sw.Write("----|");
                 }
-            );
+                sw.Write("\n");
 
-            foreach (Dictionary<(int degree, int accuracy), Fraction[]> table in new[] { table1, table2, table3 }) {
-                foreach (var key in table.Keys) {
-                    Console.WriteLine(key);
+                foreach (Dictionary<(int degree, int accuracy), Fraction[]> table in new[] { table1 }) {
+                    foreach (var key in table.Keys) {
+                        if ((key.accuracy & 1) != 0) {
+                            continue;
+                        }
 
-                    foreach (var f in table[key]) {
-                        Console.Write($"{f}, ");
+                        sw.Write($"|{key.degree}|{key.accuracy}|");
+
+                        Fraction[] fs = table[key];
+
+                        Array.Sort(vs.ToArray(), fs);
+
+                        foreach (var f in fs) {
+                            sw.Write($"{f}|");
+                        }
+
+                        sw.Write("\n");
                     }
-
-                    Console.Write("\n\n");
                 }
-
-                Console.Write("\n");
             }
 
             Console.WriteLine("END");
