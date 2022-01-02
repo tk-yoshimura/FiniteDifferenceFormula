@@ -4,6 +4,9 @@
 [centered intway 8points](https://github.com/tk-yoshimura/FiniteDifferenceFormula/blob/main/results/centered_intway_n8.md)  
 [centered intway 16points](https://github.com/tk-yoshimura/FiniteDifferenceFormula/blob/main/results/centered_intway_n16.md)  
 [centered intway 32points](https://github.com/tk-yoshimura/FiniteDifferenceFormula/blob/main/results/centered_intway_n32.md)  
+[centered intway accuracy=8](https://github.com/tk-yoshimura/FiniteDifferenceFormula/blob/main/results/centered_intway_acc8.md)  
+[centered intway accuracy=16](https://github.com/tk-yoshimura/FiniteDifferenceFormula/blob/main/results/centered_intway_acc16.md)  
+[centered intway accuracy=32](https://github.com/tk-yoshimura/FiniteDifferenceFormula/blob/main/results/centered_intway_acc32.md)  
 
 ## Reference
 Bengt Fornberg, Generation of Finite Difference Formulas of Arbitrarily Spaced Grids  
