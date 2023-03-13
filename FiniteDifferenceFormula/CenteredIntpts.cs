@@ -1,6 +1,6 @@
 ﻿namespace FiniteDifferenceFormula {
     internal class CenteredIntpts {
-        static void Main(string[] args) {
+        static void Main() {
             const int degree = 16;
 
             List<int> vs = new() { 0 };
